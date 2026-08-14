@@ -1,6 +1,6 @@
 image:
   repository: 981207388642.dkr.ecr.us-east-1.amazonaws.com/webgoat-devsecops-app
-  tag: latest
+  tag: "b05a258e0133c75101b9e8ae68dd4e08d6447e96"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
