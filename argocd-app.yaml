@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/lukaradenkovic2003/webgoat-helm.git' # Tvoj URL do Helm repo-a
+    repoURL: 'https://github.com/lukaradenkovic2003/webgoat-helm.git'
     targetRevision: HEAD
-    path: '.' # Putanja do Helm chart-a unutar repo-a
+    path: '.'
     helm:
       valueFiles:
         - values.yaml
