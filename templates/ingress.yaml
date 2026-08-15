@@ -7,6 +7,8 @@ metadata:
     alb.ingress.kubernetes.io/scheme: "internet-facing"
     alb.ingress.kubernetes.io/target-type: "ip"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/conditions.webgoat-route: '[{"field":"path-pattern","pathPattern":"/*"}]'
     alb.ingress.kubernetes.io/custom-http-headers: '[{"header-name": "X-Cloudflare-Secret", "header-value": "{{ .Values.ingress.cloudflareSecret }}"}]'
 spec:
   rules:
