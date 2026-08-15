@@ -20,6 +20,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: WEBGOAT_PORT
+              value: "{{ .Values.service.targetPort }}"
+            - name: webgoat.port
+              value: "{{ .Values.service.targetPort }}"
           resources:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
