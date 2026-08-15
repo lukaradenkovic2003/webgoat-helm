@@ -20,9 +20,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8081
-          env:
-            - name: SERVER_PORT
-              value: "8081"
+          #env:
+          #  - name: SERVER_PORT
+          #    value: "8081"
           resources:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
