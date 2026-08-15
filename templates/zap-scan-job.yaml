@@ -5,11 +5,10 @@ metadata:
   labels:
     app: {{ .Chart.Name }}-zap
   annotations:
-    # Helm hook osigurava da se job pokrene TEK NAKON što su Deployment i Service uspešno kreirani/ažurirani
     "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation
 spec:
-  ttlSecondsAfterFinished: 3600 # Briše završeni job nakon 1 sata
+  ttlSecondsAfterFinished: 3600
   template:
     metadata:
       name: {{ .Chart.Name }}-zap-scan
@@ -19,10 +18,9 @@ spec:
         - name: zap-baseline-scan
           image: ghcr.io/zaproxy/zaproxy:stable
           command: ["sh", "-c"]
-          # ZAP čeka par sekundi da WebGoat bude spreman, pa pokreće Baseline Scan nad internom Service adresom
           args:
             - |
               echo "Čekam da WebGoat servis postane dostupan..."
               sleep 15
-              echo "Pokrećem OWASP ZAP DAST skeniranje nad http://{{ .Chart.Name }}:8080/WebGoat ..."
-              zap-baseline.py -t http://{{ .Chart.Name }}:8080/WebGoat -I
+              echo "Pokrećem OWASP ZAP DAST skeniranje nad http://{{ .Chart.Name }}:{{ .Values.service.port }}/WebGoat ..."
+              zap-baseline.py -t http://{{ .Chart.Name }}:{{ .Values.service.port }}/WebGoat -I

@@ -7,6 +7,9 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:981207388642:certificate/f189a2cc-da2b-4ab8-8a01-87c68b3cc1e0
+    # KLJUČNO: Dozvoljava ulaz samo ako zahtev nosi tajni Cloudflare header
+    alb.ingress.kubernetes.io/custom-http-headers: '[{"header-name": "X-Cloudflare-Secret", "header-value": "{{ .Values.ingress.cloudflareSecret }}"}]'
 spec:
   rules:
     - host: {{ .Values.ingress.host }}

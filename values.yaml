@@ -1,7 +1,10 @@
 image:
   repository: 981207388642.dkr.ecr.us-east-1.amazonaws.com/webgoat-devsecops-app
-  tag: latest
+  tag: b05a258e0133c75101b9e8ae68dd4e08d6447e96
   pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: ecr-secret
 
 replicaCount: 1
 
@@ -12,12 +15,14 @@ service:
 
 resources:
   requests:
-    cpu: 250m
+    cpu: 100m
     memory: 256Mi
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 300m
+    memory: 400Mi
 
 ingress:
-  host: webgoat-devsecops.xyz    
-  cloudflareSecret: vbUHBNf0ClqjpuaUtIIk2m7HEok7RYXU
+  host: webgoat-devsecops.xyz
+  cloudflareSecret: ""
+  
+
