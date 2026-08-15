@@ -10,6 +10,8 @@ metadata:
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
     alb.ingress.kubernetes.io/conditions.webgoat-route: '[{"field":"path-pattern","pathPattern":"/*"}]'
     alb.ingress.kubernetes.io/custom-http-headers: '[{"header-name": "X-Cloudflare-Secret", "header-value": "{{ .Values.ingress.cloudflareSecret }}"}]'
+    alb.ingress.kubernetes.io/healthcheck-path: "/WebGoat/login"
+    alb.ingress.kubernetes.io/success-codes: "200-399"
 spec:
   rules:
     - host: {{ .Values.ingress.host }}
