@@ -10,8 +10,8 @@ replicaCount: 1
 
 service:
   type: ClusterIP
-  port: 8080
-  targetPort: 9090
+  port: 80
+  targetPort: 8080
 
 resources:
   requests:
@@ -23,4 +23,4 @@ resources:
 
 ingress:
   host: webgoat-devsecops.xyz
-  cloudflareSecret: ""
+  cloudflareSecret: "secret123"
