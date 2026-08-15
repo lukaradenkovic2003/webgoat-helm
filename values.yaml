@@ -18,8 +18,8 @@ resources:
     cpu: 100m
     memory: 256Mi
   limits:
-    cpu: 300m
-    memory: 400Mi
+    cpu: 500m
+    memory: 512Mi
 
 ingress:
   host: webgoat-devsecops.xyz
