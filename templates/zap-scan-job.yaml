@@ -22,5 +22,5 @@ spec:
             - |
               echo "Čekam da WebGoat servis postane dostupan..."
               sleep 15
-              echo "Pokrećem OWASP ZAP DAST skeniranje nad http://{{ .Chart.Name }}:8081/WebGoat ..."
-              zap-baseline.py -t http://{{ .Chart.Name }}:8081/WebGoat -I
+              echo "Pokrećem OWASP ZAP DAST skeniranje nad http://{{ .Chart.Name }}/WebGoat ..."
+              zap-baseline.py -t http://{{ .Chart.Name }}/WebGoat -I
