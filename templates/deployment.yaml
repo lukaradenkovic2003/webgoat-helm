@@ -18,8 +18,28 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: WEBGOAT_PORT
+              value: "8080"
+            - name: WEBWOLF_PORT
+              value: "9090"
           ports:
             - containerPort: 8080
+            - containerPort: 9090
+          readinessProbe:
+            httpGet:
+              path: /WebGoat/login
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /WebGoat/login
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            failureThreshold: 6
           resources:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
