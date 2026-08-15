@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Chart.Name }}-zap-scan
+  labels:
+    app: {{ .Chart.Name }}-zap
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-zap-scan
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: zap-baseline-scan
+          image: ghcr.io/zaproxy/zaproxy:stable
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Čekam da WebGoat servis postane dostupan..."
+              sleep 15
+              echo "Pokrećem OWASP ZAP DAST skeniranje nad http://{{ .Chart.Name }}/WebGoat ..."
+              zap-baseline.py -t http://{{ .Chart.Name }}/WebGoat -I
